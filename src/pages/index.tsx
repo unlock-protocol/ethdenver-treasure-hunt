@@ -65,7 +65,7 @@ export default function Home() {
   const tweetIntent = new URL("https://twitter.com/intent/tweet");
   tweetIntent.searchParams.set(
     "text",
-    `🗺 I will participate in the @unlockProtocol Treasure Hunt for @EthereumDenver! Join me! `
+    `🗺 I will participate in the @UnlockProtocol Treasure Hunt for @EthereumDenver! Join me! `
   );
   tweetIntent.searchParams.set("url", "https://ethdenver.unlock-protocol.com/");
 
@@ -75,14 +75,14 @@ export default function Home() {
         <title>EthDenver&apos;s Treasure Hunt</title>
         <meta
           name="description"
-          content="Unlock Protocol invites you to participate in the ETH Denver treasure hunt. Participants will experience the IRL NFT experience by unlocking stops and be rewarded with a refreshing treat at the end!"
+          content="Unlock Protocol invites you to participate in the ETHDenver treasure hunt. Participants will experience the IRL NFT experience by unlocking stops and be rewarded with a refreshing treat at the end!"
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
         <meta property="og:title" content="EthDenver's Treasure Hunt" />
         <meta
           property="og:description"
-          content="Unlock Protocol invites you to participate in the ETH Denver treasure hunt. Participants will experience the IRL NFT experience by unlocking stops and be rewarded with a refreshing treat at the end!"
+          content="Unlock Protocol invites you to participate in the ETHDenver treasure hunt. Participants will experience the IRL NFT experience by unlocking stops and be rewarded with a refreshing treat at the end!"
         />
         <meta
           property="og:image"
@@ -104,7 +104,7 @@ export default function Home() {
           <h1 className="text-6xl font-semibold w-full ">Ʉnlock</h1>
           <p>
             Unlock Protocol invites you to participate in the{" "}
-            <strong>ETH Denver treasure hunt</strong>. Participants will
+            <strong>ETHDenver treasure hunt</strong>. Participants will
             experience the IRL NFT experience by unlocking stops and be rewarded
             with a refreshing treat at the end!
           </p>
@@ -133,21 +133,37 @@ export default function Home() {
           </form>
           <ul className="w-full flex flex-col flex-grow">
             <li>
-              <Link className="underline" href={tweetIntent}>
+              <Link
+                rel="noreferrer"
+                target="_blank"
+                className="underline"
+                href={tweetIntent}
+              >
                 Share this on Twitter
               </Link>
             </li>
             <li>
-              <Link className="underline" href="https://unlock-protocol.com/">
+              <Link
+                rel="noreferrer"
+                target="_blank"
+                className="underline"
+                href="https://unlock-protocol.com/"
+              >
                 Learn more about Unlock Protocol
               </Link>
             </li>
           </ul>
           <footer className="bottom-0	place-self-end	">
             Interested in collaborating on this experience?{" "}
-            <a className="underline" href="mailto:hello@unlock-protocol.com">
-              Contact-us
+            <a
+              target="_blank"
+              rel="noreferrer"
+              className="underline"
+              href="mailto:hello@unlock-protocol.com"
+            >
+              Contact us
             </a>
+            .
           </footer>
         </div>
       </main>
