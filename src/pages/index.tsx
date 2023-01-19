@@ -84,9 +84,12 @@ export default function Home() {
           property="og:description"
           content="Unlock Protocol invites you to participate in the ETH Denver treasure hunt. Participants will experience the IRL NFT experience by unlocking stops and be rewarded with a refreshing treat at the end!"
         />
-        <meta property="og:image" content="" />
+        <meta
+          property="og:image"
+          content="https://ethdenver.unlock-protocol.com/images/preview.png"
+        />
       </Head>
-      <main className="min-h-screen bg-no-repeat bg-cover		 bg-[url('/images/im-signup-bg.png')] bg-black flex flex-col md:flex-row">
+      <main className="min-h-screen bg-no-repeat bg-cover	bg-[url('/images/im-signup-bg.png')] bg-black flex flex-col md:flex-row">
         <Toaster />
         <div className="md:grow flex items-center justify-items-center justify-center	bg-black/30 ">
           <Image
@@ -113,7 +116,7 @@ export default function Home() {
             <input
               defaultValue=""
               {...register("email", { required: true })}
-              className="h-12 rounded-full px-4"
+              className="h-12 rounded-full px-4  text-black"
               placeholder="hello@domain.tld"
               type="email"
             />
