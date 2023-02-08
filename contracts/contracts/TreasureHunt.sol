@@ -13,7 +13,7 @@ contract TreasureHunt {
   mapping(address => address) public signers;
 
   // initialize with the locks
-  constructor(address lock1, address lock2, address lock3, address lock4, address lock5) payable {
+  constructor(address lock1, address lock2, address lock3, address lock4, address lock5) {
     previousLock[lock2] = lock1;
     previousLock[lock3] = lock2;
     previousLock[lock4] = lock3;
@@ -75,14 +75,6 @@ contract TreasureHunt {
    */
   function toString(address account) private pure returns (string memory) {
       return toString(abi.encodePacked(account));
-  }
-
-  function toString(uint256 value) private pure returns (string memory) {
-      return toString(abi.encodePacked(value));
-  }
-
-  function toString(bytes32 value) private pure returns (string memory) {
-      return toString(abi.encodePacked(value));
   }
 
   function toString(bytes memory data) private pure returns (string memory) {
