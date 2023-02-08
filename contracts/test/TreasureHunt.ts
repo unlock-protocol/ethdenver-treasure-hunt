@@ -2,6 +2,8 @@ import { expect } from "chai";
 import { getSignatureFromSigner, getSignerForPassword } from "../lib/helper";
 const { ethers, unlock } = require("hardhat");
 
+// These are just password for the tests
+// The real ones will be different :D
 const passwords = [
   "UnlockTheWeb", // Get it from the Unlock Discord
   "CoinviseRocks", // Get it from te Coinvise discord
