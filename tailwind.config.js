@@ -12,10 +12,8 @@ module.exports = {
       padding: '2rem',
     },
     colors: {
-      black: '#020207',
-      blue: '#603DEB',
-      white: '#ffffff',
-
+      black: '#3F4F57',
+      beige: '#FFF7E8',
     },
     fontFamily: {
       'sans': ['Inter', 'ui-sans-serif', 'system-ui'],
