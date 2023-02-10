@@ -4,10 +4,16 @@ import Image from "next/image";
 import { useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
 import { useState } from "react";
-import { BiLoader as Loader } from "react-icons/bi";
+import {
+  SiTwitter as Twitter,
+  SiDiscord as Discord,
+  SiGithub as Github,
+} from "react-icons/si";
 import Link from "next/link";
 import Header from "@/components/Header";
 import { Button } from "@/components/Button";
+import { Screen } from "@/components/Screen";
+import { useAuth } from "@/hooks/useAuth";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,12 +22,20 @@ interface FormData {
 }
 
 export default function Home() {
-  const tweetIntent = new URL("https://twitter.com/intent/tweet");
-  tweetIntent.searchParams.set(
-    "text",
-    `🗺 I will participate in the @UnlockProtocol Treasure Hunt for @EthereumDenver! Join me! `
-  );
-  tweetIntent.searchParams.set("url", "https://ethdenver.unlock-protocol.com/");
+  const { isAuthenticated, user, login, logout } = useAuth();
+  const [started, setStarted] = useState(false);
+
+  const getStarted = () => {
+    // If user is logged in, get the "stage" in which they are?
+    // ie get whic locks they have unlocked
+    // based on that, set the screen to be the right one!
+
+    if (isAuthenticated) {
+      setStarted(true);
+    } else {
+      login();
+    }
+  };
 
   return (
     <>
@@ -44,34 +58,48 @@ export default function Home() {
         />
       </Head>
       <Toaster />
-      <main className="flex container mx-auto flex-col px-2 md:px-8 text-black min-h-screen bg-beige">
+      <main className="flex mx-auto flex-col px-0 text-black min-h-screen">
         <Header />
-        <div className="grow container mx-auto max-w-4xl flex flex-col md:flex-row md:mt-8">
-          <div className="md:mr-16">
-            <Image
-              alt="treasure hunt"
-              width="1920"
-              height="2335"
-              src="/images/hero.svg"
-            ></Image>
-          </div>
-          <div className="text-lg">
-            <p className="mb-2">
-              Embark on a thrilling adventure to uncover a treasure like no
-              other! Using cutting-edge NFT, you will unlock and redeem the
-              drink of your dreams.{" "}
-            </p>
-            <p className="mb-2">
-              Explore uncharted territories and solve puzzles to find the hidden
-              keys that will unlock the treasure trove of beverages. So grab
-              your 🗺️ and 🧭, and get ready for the ultimate treasure hunt to
-              quench your thirst!
-            </p>
-            <Button className="w-full mt-4">Get Started</Button>
-          </div>
-        </div>
-        <footer className="flex-none pt-16 text-center font-semibold text-4xl w-full pb-16 flex flex-col">
-          <span className="mt-6 text-lg font-light">Unlock Labs. ♥</span>
+        <Screen
+          title="Treasure hunt"
+          description="Explore uncharted territories and solve puzzles to find the
+                hidden keys that will unlock the treasure trove of beverages. So
+                grab your 🗺️ and 🧭, and get ready for the ultimate treasure
+                hunt to quench your thirst!"
+          image="/images/hunt-hero.png"
+          onClick={getStarted}
+        ></Screen>
+        <footer className="text-white mt-8 flex-none pt-16 text-center font-semibold text-4xl w-full pb-16 flex flex-col bg-darkgray">
+          <p className="mt-6 text-lg font-light">
+            Built with ♥ by{" "}
+            <Link className="underline" href="https://unlock-protocol.com">
+              Unlock Labs
+            </Link>{" "}
+            in collaboration with{" "}
+          </p>
+          <ul>
+            <li>Coinvise</li>
+          </ul>
+          <ul className="mt-8 flex space-x-8 justify-items-center justify-center	">
+            <li>
+              <Link target="_blank" href="https://twitter.com/unlockprotocol">
+                <Twitter />
+              </Link>
+            </li>
+            <li>
+              <Link target="_blank" href="https://discord.unlock-protocol.com">
+                <Discord />
+              </Link>
+            </li>
+            <li>
+              <Link
+                target="_blank"
+                href="https://github.com/unlock-protocol/unlock"
+              >
+                <Github />
+              </Link>
+            </li>
+          </ul>
         </footer>
       </main>
     </>
