@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.markdown a {
+  text-decoration: underline;
+}
+
+.markdown li {
+  padding-left: 1em;
+  list-style-type: square; /* See https://developer.mozilla.org/en-US/docs/Web/CSS/list-style-type     */
+  list-style-position: inside;
+}

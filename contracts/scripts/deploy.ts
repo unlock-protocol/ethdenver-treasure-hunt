@@ -1,18 +1,49 @@
-import { ethers } from "hardhat";
+import { ethers, unlock } from "hardhat";
+import { passwords, getSignerForPassword } from "../lib/helper";
 
 async function main() {
-  const currentTimestampInSeconds = Math.round(Date.now() / 1000);
-  const ONE_YEAR_IN_SECS = 365 * 24 * 60 * 60;
-  const unlockTime = currentTimestampInSeconds + ONE_YEAR_IN_SECS;
+  // Ok so we need to deploy 5 locks, set Julien as lock Manager,
+  // Deploy the hook
+  const [user] = await ethers.getSigners();
 
-  const lockedAmount = ethers.utils.parseEther("1");
+  const expirationDuration = ethers.constants.MaxUint256;
+  const maxNumberOfKeys = ethers.constants.MaxUint256;
+  const keyPrice = 0;
+  const locks = [];
 
-  const Lock = await ethers.getContractFactory("Lock");
-  const lock = await Lock.deploy(unlockTime, { value: lockedAmount });
+  // Create all the locks
+  for (let i = 0; i < passwords.length; i++) {
+    const { lock } = await unlock.createLock({
+      expirationDuration,
+      maxNumberOfKeys,
+      keyPrice,
+      name: `EthDenver Treasure Hunt Stop ${i}`,
+    });
+    locks.push(lock);
+  }
 
-  await lock.deployed();
+  const TreasureHunt = await ethers.getContractFactory("TreasureHunt");
+  const hook = await TreasureHunt.deploy(...locks.map((lock) => lock.address));
+  await hook.deployed();
 
-  console.log(`Lock with 1 ETH and unlock timestamp ${unlockTime} deployed to ${lock.address}`);
+  // Configure all the locks
+  for (let i = 0; i < passwords.length; i++) {
+    const lock = locks[i];
+    await (
+      await lock.setEventHooks(
+        hook.address,
+        ethers.constants.AddressZero,
+        ethers.constants.AddressZero,
+        ethers.constants.AddressZero,
+        ethers.constants.AddressZero,
+        ethers.constants.AddressZero,
+        ethers.constants.AddressZero
+      )
+    ).wait();
+
+    const signer = await getSignerForPassword(passwords[i]);
+    await hook.setSigner(lock.address, signer.address);
+  }
 }
 
 // We recommend this pattern to be able to use async/await everywhere

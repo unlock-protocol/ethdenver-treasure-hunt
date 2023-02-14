@@ -1,14 +1,22 @@
 import Image from "next/image";
+import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 import { Button } from "./Button";
 
 interface ScreenProps {
   title: string;
   description: string;
   image: string;
-  onClick: () => void;
+  cta: string;
+  action: () => void;
 }
 
-export const Screen = ({ title, description, image, onClick }: ScreenProps) => {
+export const Screen = ({
+  title,
+  description,
+  image,
+  cta,
+  action,
+}: ScreenProps) => {
   return (
     <div className="grow container mx-auto max-w-4xl flex flex-col md:mt-8">
       <Image alt="treasure hunt" width="1920" height="2335" src={image} />
@@ -18,16 +26,22 @@ export const Screen = ({ title, description, image, onClick }: ScreenProps) => {
           <h1 className="text-7xl font-oswald uppercase font-semibold">
             {title}
           </h1>
-          <p className="mb-2 mt-4 text-2xl">{description}</p>
+
+          <div className="mb-2 mt-4 text-2xl markdown">
+            {/* eslint-disable-next-line react/no-children-prop */}
+            <ReactMarkdown children={description} />
+          </div>
         </div>
-        <div className="grow">
-          <Button
-            onClick={onClick}
-            className="w-full border-none bg-white text-black border-0 font-semibold"
-          >
-            Get Started
-          </Button>
-        </div>
+        {cta && (
+          <div className="grow">
+            <Button
+              onClick={action}
+              className="w-full border-none bg-white text-black border-0 font-semibold"
+            >
+              {cta}
+            </Button>
+          </div>
+        )}
       </div>
     </div>
   );

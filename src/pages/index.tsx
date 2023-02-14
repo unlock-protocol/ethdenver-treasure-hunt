@@ -1,9 +1,10 @@
 import Head from "next/head";
+import { ethers } from "ethers";
+import PublicLockV12 from "@unlock-protocol/contracts/dist/abis/PublicLock/PublicLockV12.json";
+import { screens } from "@/lib/screens";
+
 import { Inter } from "@next/font/google";
-import Image from "next/image";
-import { useForm } from "react-hook-form";
-import toast, { Toaster } from "react-hot-toast";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   SiTwitter as Twitter,
   SiDiscord as Discord,
@@ -11,31 +12,124 @@ import {
 } from "react-icons/si";
 import Link from "next/link";
 import Header from "@/components/Header";
-import { Button } from "@/components/Button";
 import { Screen } from "@/components/Screen";
 import { useAuth } from "@/hooks/useAuth";
+import { useRouter } from "next/router";
+import Image from "next/image";
 
 const inter = Inter({ subsets: ["latin"] });
+
+// TODO: CHANGE ME!
+const network = 5;
 
 interface FormData {
   email: string;
 }
 
+const startingScreen = {
+  title: "Treasure hunt",
+  description: `Explore uncharted territories and solve puzzles to find the
+        hidden keys that will unlock the treasure trove of beverages. So
+        grab your 🗺️ and 🧭, and get ready for the ultimate treasure
+        hunt to quench your thirst!`,
+  image: "/images/hunt-hero.png",
+  cta: "Get Started",
+  index: -1, // Not started!
+};
+
+interface ScreenType {
+  title: string;
+  description: string;
+  image: string;
+  cta: string;
+  index: number;
+  action?: () => void;
+}
+
 export default function Home() {
-  const { isAuthenticated, user, login, logout } = useAuth();
-  const [started, setStarted] = useState(false);
+  const { user, login, purchase } = useAuth();
+  const [screen, setScreen] = useState<ScreenType>(startingScreen);
+  const router = useRouter();
 
-  const getStarted = () => {
-    // If user is logged in, get the "stage" in which they are?
-    // ie get whic locks they have unlocked
-    // based on that, set the screen to be the right one!
+  const advance = useCallback(
+    async (index: number) => {
+      if (!user) {
+        return login();
+      }
 
-    if (isAuthenticated) {
-      setStarted(true);
+      const provider = new ethers.providers.JsonRpcBatchProvider(
+        `https://rpc.unlock-protocol.com/${network}`
+      );
+
+      const status = await Promise.all(
+        screens.map(async (s) => {
+          const lock = new ethers.Contract(s.lock, PublicLockV12.abi, provider);
+          return {
+            ...s,
+            hasUnlocked: await lock.getHasValidKey(user),
+          };
+        })
+      );
+      const isUnlocked = status[index].hasUnlocked;
+      if (!isUnlocked) {
+        setScreen({
+          index,
+          title: status[index].title,
+          description: status[index].locked.description,
+          image: `/images/screens/${index + 1}/locked.png`,
+          cta: "Unlock it!",
+          action: () => {
+            purchase(
+              {
+                title: "Let's open the Box!",
+                locks: {
+                  [status[index].lock]: {
+                    name: status[index].title,
+                    network,
+                    emailRequired: index == 1 || index == 4,
+                    skipRecipient: true,
+                    password: true,
+                  },
+                },
+                expectedAddress: user,
+                pessimistic: true,
+              },
+              {
+                screen: index.toString(),
+              }
+            );
+          },
+        });
+      } else {
+        setScreen({
+          index,
+          title: status[index].title,
+          description: status[index].unlocked.description,
+          image: `/images/screens/${index + 1}/unlocked.png`,
+          cta: index == 4 ? "" : "Open the next lock!",
+          action: () => {
+            advance(index + 1);
+          },
+        });
+      }
+    },
+    [user, login, purchase]
+  );
+
+  useEffect(() => {
+    if (!user) {
+      setScreen({
+        ...startingScreen,
+      });
+    } else if (Number(router.query.screen) > 0) {
+      advance(Number(router.query.screen));
     } else {
-      login();
+      setScreen({
+        ...startingScreen,
+        cta: "Resume your hunt!",
+      });
     }
-  };
+  }, [user, router.query]);
 
   return (
     <>
@@ -57,18 +151,9 @@ export default function Home() {
           content="https://ethdenver.unlock-protocol.com/images/preview.png"
         />
       </Head>
-      <Toaster />
       <main className="flex mx-auto flex-col px-0 text-black min-h-screen">
         <Header />
-        <Screen
-          title="Treasure hunt"
-          description="Explore uncharted territories and solve puzzles to find the
-                hidden keys that will unlock the treasure trove of beverages. So
-                grab your 🗺️ and 🧭, and get ready for the ultimate treasure
-                hunt to quench your thirst!"
-          image="/images/hunt-hero.png"
-          onClick={getStarted}
-        ></Screen>
+        <Screen action={() => advance(screen.index + 1)} {...screen}></Screen>
         <footer className="text-white mt-8 flex-none pt-16 text-center font-semibold text-4xl w-full pb-16 flex flex-col bg-darkgray">
           <p className="mt-6 text-lg font-light">
             Built with ♥ by{" "}
@@ -77,8 +162,15 @@ export default function Home() {
             </Link>{" "}
             in collaboration with{" "}
           </p>
-          <ul>
-            <li>Coinvise</li>
+          <ul className="mt-8 flex space-x-8 justify-items-center justify-center	">
+            <li>
+              <Image
+                alt="Coinvise"
+                width="200"
+                height="40"
+                src={"/images/coinvise.svg"}
+              ></Image>
+            </li>
           </ul>
           <ul className="mt-8 flex space-x-8 justify-items-center justify-center	">
             <li>
