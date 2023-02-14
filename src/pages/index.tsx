@@ -121,7 +121,7 @@ export default function Home() {
       setScreen({
         ...startingScreen,
       });
-    } else if (Number(router.query.screen) > 0) {
+    } else if (Number(router.query.screen) > -1) {
       advance(Number(router.query.screen));
     } else {
       setScreen({
