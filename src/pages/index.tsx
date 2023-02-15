@@ -46,6 +46,10 @@ interface ScreenType {
   action?: () => void;
 }
 
+const provider = new ethers.providers.JsonRpcBatchProvider(
+  `https://rpc.unlock-protocol.com/${network}`
+);
+
 export default function Home() {
   const { user, login, purchase } = useAuth();
   const [screen, setScreen] = useState<ScreenType>(startingScreen);
@@ -56,10 +60,6 @@ export default function Home() {
       if (!user) {
         return login();
       }
-
-      const provider = new ethers.providers.JsonRpcBatchProvider(
-        `https://rpc.unlock-protocol.com/${network}`
-      );
 
       const status = await Promise.all(
         screens.map(async (s) => {
@@ -86,7 +86,7 @@ export default function Home() {
                   [status[index].lock]: {
                     name: status[index].title,
                     network,
-                    emailRequired: index == 1 || index == 4,
+                    emailRequired: index == 0 || index == 4,
                     skipRecipient: true,
                     password: true,
                   },
@@ -117,18 +117,35 @@ export default function Home() {
   );
 
   useEffect(() => {
-    if (!user) {
-      setScreen({
-        ...startingScreen,
-      });
-    } else if (Number(router.query.screen) > -1) {
-      advance(Number(router.query.screen));
-    } else {
-      setScreen({
-        ...startingScreen,
-        cta: "Resume your hunt!",
-      });
-    }
+    const run = async () => {
+      if (!user) {
+        setScreen({
+          ...startingScreen,
+        });
+      } else if (Number(router.query.screen) > -1) {
+        advance(Number(router.query.screen));
+      } else {
+        //
+        const lock = new ethers.Contract(
+          screens[0].lock,
+          PublicLockV12.abi,
+          provider
+        );
+        const hasStarted = await lock.getHasValidKey(user);
+        if (hasStarted) {
+          setScreen({
+            ...startingScreen,
+            cta: "Resume your hunt!",
+          });
+        } else {
+          setScreen({
+            ...startingScreen,
+            cta: "Start your hunt!",
+          });
+        }
+      }
+    };
+    run();
   }, [user, router.query]);
 
   return (
