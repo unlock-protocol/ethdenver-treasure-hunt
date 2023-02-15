@@ -81,10 +81,10 @@ export default function Home() {
           action: () => {
             purchase(
               {
-                title: "Let's open the Box!",
+                title: "Treasure Hunt!",
                 locks: {
                   [status[index].lock]: {
-                    name: status[index].title,
+                    name: `Key ${index + 1}: ${status[index].title}`,
                     network,
                     emailRequired: index == 0 || index == 4,
                     skipRecipient: true,
@@ -151,7 +151,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>EthDenver&apos;s Treasure Hunt</title>
+        <title>ETHDenver Treasure Hunt</title>
         <meta
           name="description"
           content="Unlock Protocol invites you to participate in the ETHDenver treasure hunt. Participants will experience the IRL NFT experience by unlocking stops and be rewarded with a refreshing treat at the end!"

@@ -17,7 +17,7 @@ async function main() {
       expirationDuration,
       maxNumberOfKeys,
       keyPrice,
-      name: `EthDenver Treasure Hunt Stop ${i}`,
+      name: `ETHDenver Treasure Hunt Stop ${i}`,
     });
     locks.push(lock);
   }

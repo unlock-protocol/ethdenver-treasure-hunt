@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.markdown p {
+  margin-bottom: 0.5em;
+}
+
 .markdown a {
   text-decoration: underline;
 }
