@@ -16,6 +16,7 @@ import { Screen } from "@/components/Screen";
 import { useAuth } from "@/hooks/useAuth";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import { LoaderIcon } from "react-hot-toast";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -54,6 +55,7 @@ export default function Home() {
   const { user, login, purchase } = useAuth();
   const [screen, setScreen] = useState<ScreenType>(startingScreen);
   const router = useRouter();
+  const [loading, setLoading] = useState(true);
 
   const advance = useCallback(
     async (index: number) => {
@@ -118,12 +120,13 @@ export default function Home() {
 
   useEffect(() => {
     const run = async () => {
+      setLoading(true);
       if (!user) {
         setScreen({
           ...startingScreen,
         });
       } else if (Number(router.query.screen) > -1) {
-        advance(Number(router.query.screen));
+        await advance(Number(router.query.screen));
       } else {
         //
         const lock = new ethers.Contract(
@@ -144,9 +147,12 @@ export default function Home() {
           });
         }
       }
+      setLoading(false);
     };
     run();
   }, [user, router.query]);
+
+  const loaded = router.isReady && !loading;
 
   return (
     <>
@@ -170,7 +176,14 @@ export default function Home() {
       </Head>
       <main className="flex mx-auto flex-col px-0 text-black min-h-screen">
         <Header />
-        <Screen action={() => advance(screen.index + 1)} {...screen}></Screen>
+        {!loaded && (
+          <div className="flex justify-center	items-center h-screen	">
+            <LoaderIcon />
+          </div>
+        )}
+        {loaded && (
+          <Screen action={() => advance(screen.index + 1)} {...screen} />
+        )}
         <footer className="text-white mt-8 flex-none pt-16 text-center font-semibold text-4xl w-full pb-16 flex flex-col bg-darkgray">
           <p className="mt-6 text-lg font-light">
             Built with ♥ by{" "}
