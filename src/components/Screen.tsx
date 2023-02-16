@@ -1,8 +1,8 @@
+import Link from "next/link";
 import Image from "next/image";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 import { Button, buttonClasses } from "./Button";
 import { screens } from "@/lib/screens";
-import Link from "next/link";
 
 interface ScreenProps {
   index: number;
@@ -42,11 +42,21 @@ export const Screen = ({
               key={i}
               className={`flex grow ${bgColor} justify-center items-center h-6`}
             >
-              <span
-                className={`hidden md:flex text-centerF font-semibold ${textColor}`}
-              >
-                {i > 0 ? screens[i - 1].title : "Treasure Hunt"}
-              </span>
+              {!isActive && (
+                <span
+                  className={`hidden md:flex text-centerF font-semibold ${textColor}`}
+                >
+                  {i > 0 ? screens[i - 1].title : "Treasure Hunt"}
+                </span>
+              )}
+              {isActive && (
+                <Link
+                  href={`?screen=${i - 1}`}
+                  className={`hidden md:flex text-centerF font-semibold ${textColor}`}
+                >
+                  {i > 0 ? screens[i - 1].title : "Treasure Hunt"}
+                </Link>
+              )}
             </li>
           );
         })}

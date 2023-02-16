@@ -110,7 +110,7 @@ export default function Home() {
           title: status[index].title,
           description: status[index].unlocked.description,
           image: `/images/screens/${index + 1}/unlocked.png`,
-          cta: index == 4 ? "" : "Open the next lock!",
+          cta: index == 4 ? "" : "Move to the next adventure!",
           action: () => {
             advance(index + 1);
           },
