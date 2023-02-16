@@ -52,7 +52,7 @@ Here's how to get it:
 Spork got very curious about it, but we don't want to open it alone!
 
 1. Go to [Polygon's Discord](https://discord.gg/0xpolygon)
-2. The password is hidden in __#💫-showcase-your-project__ thread, look for the 🎁 ETHDenver Treasure Hunt thread
+2. The password is hidden in __#🧬 | general__ thread, look for the 💫 ETHDenver Treasure Hunt thread
 3. Go ahead, Unlock the cabin with the password`,
     },
     unlocked: {
