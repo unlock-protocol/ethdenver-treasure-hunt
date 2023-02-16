@@ -18,3 +18,13 @@ export const getSignatureFromSigner = async (message: string, signer: any) => {
 
   return signature;
 };
+
+// These are just password for the tests
+// The real ones will be different :D
+export const passwords = [
+  "UnlockTheWeb", // Get it from the Unlock Discord
+  "CoinviseRocks", // Get it from te Coinvise discord
+  "ThirdWebDevs", // Get it from the ThirdWeb Discord
+  "WIFI_PASSWORD", // Get it from the main venue
+  "WelcomeToTheClub", // Get it from the Unlock + coinvise party!
+];

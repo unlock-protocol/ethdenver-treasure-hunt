@@ -6,6 +6,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        'oswald': ["Oswald"],
+      },
     },
     container: {
       center: true,
@@ -13,9 +16,11 @@ module.exports = {
     },
     colors: {
       black: '#020207',
-      blue: '#603DEB',
-      white: '#ffffff',
-
+      gray: '#3F4F57',
+      beige: '#FFF7E8',
+      pink: '#F9548E',
+      darkgray: "#282A2D",
+      white: '#FFFFFF',
     },
     fontFamily: {
       'sans': ['Inter', 'ui-sans-serif', 'system-ui'],
