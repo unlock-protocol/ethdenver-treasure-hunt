@@ -30,7 +30,7 @@ export const Screen = ({
 
   return (
     <div className="grow container mx-auto max-w-4xl flex flex-col md:mt-8">
-      <Image alt="treasure hunt" width="1920" height="2335" src={image} />
+      <Image alt="treasure hunt" width="832" height="501" src={image} />
       <ul className="flex w-full gap-2 my-2">
         {[...Array(6)].map((x, i) => {
           const isActive = index + 1 >= i;
