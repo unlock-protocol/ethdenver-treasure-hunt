@@ -21,7 +21,7 @@ import { LoaderIcon } from "react-hot-toast";
 const inter = Inter({ subsets: ["latin"] });
 
 // TODO: CHANGE ME!
-const network = 5;
+const network = 137;
 
 interface FormData {
   email: string;
