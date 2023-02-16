@@ -25,7 +25,7 @@ export const Screen = ({
 }: ScreenProps) => {
   const tweetIntent = new URL("https://twitter.com/intent/tweet");
   tweetIntent.searchParams.set("text", tweet || "");
-  tweetIntent.searchParams.set("via", "@unlockProtocol");
+  tweetIntent.searchParams.set("via", "unlockProtocol");
   tweetIntent.searchParams.set("url", "https://ethdenver.unlock-protocol.com/");
 
   return (
