@@ -11,7 +11,7 @@ You will collect the first key with the _Unlock it!_ button but before clicking 
 Here's how to get it:
 
 1. Join [Unlock's Discord server](https://discord.unlock-protocol.com)!
-2. Say hello in __#introductions-👋__ channel,
+2. Check the __#general-🌎__ channel,
 3. Write down the password from the Discord,
 4. Click the _Unlock it!_ button and enter the password when prompted.`,
     },
