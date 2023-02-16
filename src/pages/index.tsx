@@ -75,14 +75,21 @@ export default function Home() {
         <title>ETHDenver Treasure Hunt</title>
         <meta
           name="description"
-          content="Unlock Protocol invites you to participate in the ETHDenver treasure hunt. Participants will experience the IRL NFT experience by unlocking stops and be rewarded with a refreshing treat at the end!"
+          content="Unlock Protocol invites you to join the ETHDenver treasure hunt. Participants will experience the IRL NFT experience by unlocking stops and be rewarded with a refreshing treat at the end!"
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
         <meta property="og:title" content="ETHDenver Treasure Hunt" />
+        <meta property="twitter:title" content="ETHDenver Treasure Hunt" />
+
         <meta
           property="og:description"
-          content="Unlock Protocol invites you to participate in the ETHDenver treasure hunt. Participants will experience the IRL NFT experience by unlocking stops and be rewarded with a refreshing treat at the end!"
+          content="Unlock Protocol invites you to join the ETHDenver treasure hunt. Participants will experience the IRL NFT experience by unlocking stops and be rewarded with a refreshing treat at the end!"
+        />
+
+        <meta
+          property="twitter:description"
+          content="Unlock Protocol invites you to join the ETHDenver treasure hunt. Participants will experience the IRL NFT experience by unlocking stops and be rewarded with a refreshing treat at the end!"
         />
         <meta
           property="og:image"
@@ -103,7 +110,7 @@ export default function Home() {
         <div className="md:w-96 gap-4 px-8 text-white flex flex-col items-center justify-items-center justify-center py-10">
           <h1 className="text-6xl font-semibold w-full ">Ʉnlock</h1>
           <p>
-            Unlock Protocol invites you to participate in the{" "}
+            Unlock Protocol invites you to join the{" "}
             <strong>ETHDenver treasure hunt</strong>. Participants will
             experience the IRL NFT experience by unlocking stops and be rewarded
             with a refreshing treat at the end!
