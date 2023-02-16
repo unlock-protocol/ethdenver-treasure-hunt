@@ -20,7 +20,6 @@ import { LoaderIcon } from "react-hot-toast";
 
 const inter = Inter({ subsets: ["latin"] });
 
-// TODO: CHANGE ME!
 const network = 137;
 
 interface FormData {
@@ -35,6 +34,7 @@ const startingScreen = {
         hunt to quench your thirst!`,
   image: "/images/hunt-hero.png",
   cta: "Get Started",
+  tweet: `🗺 I will participate in the @UnlockProtocol Treasure Hunt for @EthereumDenver! Join me! `,
   index: -1, // Not started!
 };
 
@@ -44,6 +44,7 @@ interface ScreenType {
   image: string;
   cta: string;
   index: number;
+  tweet?: string;
   action?: () => void;
 }
 
@@ -76,6 +77,7 @@ export default function Home() {
       if (!isUnlocked) {
         setScreen({
           index,
+          tweet: status[index].tweet,
           title: status[index].title,
           description: status[index].locked.description,
           image: `/images/screens/${index + 1}/locked.png`,
@@ -105,6 +107,7 @@ export default function Home() {
       } else {
         setScreen({
           index,
+          tweet: status[index].tweet,
           title: status[index].title,
           description: status[index].unlocked.description,
           image: `/images/screens/${index + 1}/unlocked.png`,

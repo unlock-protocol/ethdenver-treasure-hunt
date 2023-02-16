@@ -1,7 +1,8 @@
 import Image from "next/image";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
-import { Button } from "./Button";
+import { Button, buttonClasses } from "./Button";
 import { screens } from "@/lib/screens";
+import Link from "next/link";
 
 interface ScreenProps {
   index: number;
@@ -9,6 +10,7 @@ interface ScreenProps {
   description: string;
   image: string;
   cta: string;
+  tweet: string;
   action: () => void;
 }
 
@@ -16,10 +18,16 @@ export const Screen = ({
   index, // index of the screen we are on! (starts at -1)
   title,
   description,
+  tweet,
   image,
   cta,
   action,
 }: ScreenProps) => {
+  const tweetIntent = new URL("https://twitter.com/intent/tweet");
+  tweetIntent.searchParams.set("text", tweet);
+  tweetIntent.searchParams.set("via", "@unlockProtocol");
+  tweetIntent.searchParams.set("url", "https://ethdenver.unlock-protocol.com/");
+
   return (
     <div className="grow container mx-auto max-w-4xl flex flex-col md:mt-8">
       <Image alt="treasure hunt" width="1920" height="2335" src={image} />
@@ -32,9 +40,13 @@ export const Screen = ({
           return (
             <li
               key={i}
-              className={`grow ${bgColor} text-center font-semibold ${textColor}`}
+              className={`flex grow ${bgColor} justify-center items-center h-6`}
             >
-              {i > 0 ? screens[i - 1].title : "Treasure Hunt"}
+              <span
+                className={`hidden md:flex text-center font-semibold ${textColor}`}
+              >
+                {i > 0 ? screens[i - 1].title : "Treasure Hunt"}
+              </span>
             </li>
           );
         })}
@@ -49,6 +61,16 @@ export const Screen = ({
             {/* eslint-disable-next-line react/no-children-prop */}
             <ReactMarkdown children={description} />
           </div>
+          <p className="mt-6 text-center md:text-left">
+            <Link
+              rel="noreferrer"
+              target="_blank"
+              className={`${buttonClasses} enabled:hover:bg-red enabled:bg-darkred border-yellow border text-yellow py-2 px-4 rounded-full whitespace-nowrap undefined`}
+              href={tweetIntent}
+            >
+              Share this on Twitter
+            </Link>
+          </p>
         </div>
         {cta && (
           <div className="grow">
