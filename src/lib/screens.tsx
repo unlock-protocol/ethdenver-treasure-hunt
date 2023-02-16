@@ -1,7 +1,7 @@
 export const screens = [
   {
-    lock: "0xe08F1953116C7fcCbee5552a589Bbe44cF79073a",
-    network: 5,
+    lock: "0xf91a25a08f33354c5854762cbb219602b2f00db7",
+    network: 137,
     hasUnlocked: false,
     title: "Downhill ski",
     locked: {
@@ -21,8 +21,8 @@ Here's how to get it:
     },
   },
   {
-    lock: "0x063e0ca75D9c981b7A17dAa8a1183385132c82dA",
-    network: 5,
+    lock: "0x90f0546ba5bc01a5923a87304dbc41212a844da6",
+    network: 137,
     hasUnlocked: false,
     title: "The cabin",
     locked: {
@@ -38,8 +38,8 @@ Here's how to get it:
     },
   },
   {
-    lock: "0xD7a6Dec7759e012cFF46eFaE328d2Bf42DF22Aa8",
-    network: 5,
+    lock: "0x470bc03443bcc9c349a7d9c45a11f5cfbb81094e",
+    network: 137,
     hasUnlocked: false,
     title: "The tiny wood box",
     locked: {
@@ -57,8 +57,8 @@ Spork got very curious about it, but we don't want to open it alone!
     },
   },
   {
-    lock: "0xcF2b95082b4071f622E8678ba470234a0E855BB9",
-    network: 5,
+    lock: "0x51991af02a3fe3d1f85f2e76aec3f3aa1e7476af",
+    network: 137,
     hasUnlocked: false,
     title: "The Morse code",
     locked: {
@@ -70,8 +70,8 @@ Spork got very curious about it, but we don't want to open it alone!
     },
   },
   {
-    lock: "0x1A418c1B52E6516251D507D967CdfF144A4b27Eb",
-    network: 5,
+    lock: "0xcc65592e31832621b81aa12abe5bfef549632cf4",
+    network: 137,
     hasUnlocked: false,
     title: "The destination",
     locked: {
