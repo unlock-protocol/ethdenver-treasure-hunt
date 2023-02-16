@@ -77,7 +77,6 @@ export default function Home() {
       if (!isUnlocked) {
         setScreen({
           index,
-          tweet: status[index].tweet,
           title: status[index].title,
           description: status[index].locked.description,
           image: `/images/screens/${index + 1}/locked.png`,

@@ -10,7 +10,7 @@ interface ScreenProps {
   description: string;
   image: string;
   cta: string;
-  tweet: string;
+  tweet?: string;
   action: () => void;
 }
 
@@ -24,7 +24,7 @@ export const Screen = ({
   action,
 }: ScreenProps) => {
   const tweetIntent = new URL("https://twitter.com/intent/tweet");
-  tweetIntent.searchParams.set("text", tweet);
+  tweetIntent.searchParams.set("text", tweet || "");
   tweetIntent.searchParams.set("via", "@unlockProtocol");
   tweetIntent.searchParams.set("url", "https://ethdenver.unlock-protocol.com/");
 
@@ -43,7 +43,7 @@ export const Screen = ({
               className={`flex grow ${bgColor} justify-center items-center h-6`}
             >
               <span
-                className={`hidden md:flex text-center font-semibold ${textColor}`}
+                className={`hidden md:flex text-centerF font-semibold ${textColor}`}
               >
                 {i > 0 ? screens[i - 1].title : "Treasure Hunt"}
               </span>
@@ -61,16 +61,18 @@ export const Screen = ({
             {/* eslint-disable-next-line react/no-children-prop */}
             <ReactMarkdown children={description} />
           </div>
-          <p className="mt-6 text-center md:text-left">
-            <Link
-              rel="noreferrer"
-              target="_blank"
-              className={`${buttonClasses} enabled:hover:bg-red enabled:bg-darkred border-yellow border text-yellow py-2 px-4 rounded-full whitespace-nowrap undefined`}
-              href={tweetIntent}
-            >
-              Share this on Twitter
-            </Link>
-          </p>
+          {tweet && (
+            <p className="mt-6 text-center md:text-left">
+              <Link
+                rel="noreferrer"
+                target="_blank"
+                className={`${buttonClasses} enabled:hover:bg-red enabled:bg-darkred border-yellow border text-yellow py-2 px-4 rounded-full whitespace-nowrap undefined`}
+                href={tweetIntent}
+              >
+                Share this on Twitter
+              </Link>
+            </p>
+          )}
         </div>
         {cta && (
           <div className="grow">
