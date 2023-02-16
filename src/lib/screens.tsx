@@ -11,7 +11,7 @@ You will collect the first key with the _Unlock it!_ button but before clicking 
 Here's how to get it:
 
 1. Join [Unlock's Discord server](https://discord.unlock-protocol.com)!
-2. Check the __#general-🌎__ channel,
+2. Check the __#general-🌎__ channel and the __💫 Treasure Hunt Password__ thread,
 3. Write down the password from the Discord,
 4. Click the _Unlock it!_ button and enter the password when prompted.`,
     },
@@ -52,7 +52,7 @@ Here's how to get it:
 Spork got very curious about it, but we don't want to open it alone!
 
 1. Go to [Polygon's Discord](https://discord.gg/0xpolygon)
-2. The password is hidden in __#🧬 | general__ channel, look for the 💫 Treasure Hunt Password thread
+2. The password is hidden in __#🧬 | general__ channel, look for the __💫 Treasure Hunt Password__ thread
 3. Go ahead, Unlock the cabin with the password`,
     },
     unlocked: {
