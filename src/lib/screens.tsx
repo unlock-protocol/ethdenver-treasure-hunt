@@ -29,7 +29,7 @@ Here's how to get it:
       description: `Spork arrives right in front of cabin; the door is locked but with a welcome sign along with a short instruction:
 
 1. Go to [Coinvise's discord](https://discord.gg/w9YFJU8SGz)
-2. The password is hidden in #XXXXX
+2. The password is hidden in the __#general__ channel. Look for the 🎁 ETHDenver Treasure Hunt thread!
 3. Go ahead, Unlock the cabin with the password`,
     },
     unlocked: {
@@ -47,8 +47,8 @@ Here's how to get it:
       
 Spork got very curious about it, but we don't want to open it alone!
 
-1. Go to [XXXXXX's discord](https://discord.gg/XXXXXXX)
-2. The password is hidden in #XXXXX
+1. Go to [Polygon's Discord](https://discord.gg/0xpolygon)
+2. The password is hidden in __#💫-showcase-your-project__ thread, look for the 🎁 ETHDenver Treasure Hunt thread
 3. Go ahead, Unlock the cabin with the password`,
     },
     unlocked: {
@@ -80,7 +80,7 @@ Spork got very curious about it, but we don't want to open it alone!
 1. Go to the Unlock x Coinvise party on March 1st
 2. Find the password inside the venue and unlock the final lock
 4. You'll receive a QR code via email after unlocking the final lock
-5. Show the QR code to one of Unlock’s team members for a prize!
+5. Show the QR code to one of Unlock's team members for a prize!
 
 `,
     },

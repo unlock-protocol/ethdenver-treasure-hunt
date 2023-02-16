@@ -15,7 +15,8 @@ module.exports = {
       padding: '2rem',
     },
     colors: {
-      black: '#3F4F57',
+      black: '#020207',
+      gray: '#3F4F57',
       beige: '#FFF7E8',
       pink: '#F9548E',
       darkgray: "#282A2D",
