@@ -67,7 +67,7 @@ Spork got very curious about it, but we don't want to open it alone!
     hasUnlocked: false,
     title: "The Morse code",
     locked: {
-      description: `Spork can read Morse code! Here is what it says: “GM fren, you're invited to Rock Bottom for a party! But before you get there, you will need to use ETHDenver's WiFi name as the password for this next lock!”`,
+      description: `Spork can read Morse code! Here is what it says: “GM fren, you're invited to Rock Bottom for a party! But before you get there, you will need to use the name of the ETHDenver venue lounge as the password for this next lock! Hint: it starts with _$_.”`,
     },
     unlocked: {
       description:
