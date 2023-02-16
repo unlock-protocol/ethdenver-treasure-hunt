@@ -58,8 +58,11 @@ export const Screen = ({
           </h1>
 
           <div className="mb-2 mt-4 text-2xl markdown">
-            {/* eslint-disable-next-line react/no-children-prop */}
-            <ReactMarkdown children={description} />
+            <ReactMarkdown
+              /* eslint-disable-next-line react/no-children-prop */
+              children={description}
+              linkTarget="_blank"
+            />
           </div>
           {tweet && (
             <p className="mt-6 text-center md:text-left">
